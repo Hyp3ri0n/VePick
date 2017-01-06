@@ -1,0 +1,37 @@
+<html>
+<head>
+	<link href="/interfaces/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>Accueil</h1>
+	<h2>
+		<a href="/interfaces/client/index.html">interface client</a>
+	</h2>
+	<h2>
+		<a href="/interfaces/conducteur/index.html">interface conducteur</a>
+	</h2>
+	<h2>
+		<a href="/interfaces/superviseur/index.html">interface superviseur</a>
+	</h2>
+	<img src="/interfaces/earth.jpg" width="500px"/>
+	<button onclick="sendPost();">test me</button>
+	<script type="text/javascript">
+		function sendPost() {
+			var http = new XMLHttpRequest();
+			var url = "/java/test";
+			var params = "commande=scenario&num=4";
+			http.open("POST", url, true);
+
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			http.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http.readyState == 4 && http.status == 200) {
+			        alert(http.responseText);
+			    }
+			}
+			http.send(params);
+		}
+	</script>
+</body>
+</html>
