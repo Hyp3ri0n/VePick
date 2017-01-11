@@ -1,46 +1,143 @@
 <html>
+<head>
+<link href="/interfaces/base/foundation.min.css" rel="stylesheet"
+	type="text/css">
+<link href="/interfaces/base/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/interfaces/base/jquery.js"></script>
+<script type="text/javascript" src="/interfaces/base/what-input.js"></script>
+<script type="text/javascript" src="/interfaces/base/foundation.min.js"></script>
+
+<script type="text/javascript" src="/interfaces/client/js/inscription.js"></script>
+</head>
 <body>
-	<h1>Interface Client</h1>
-	<h2>
-		<a href="../index.html">retour</a>
-	</h2>
-	<button onclick="premierScenarioPartUn();">test me</button>
-	
+	<div class="row">
+		<div class="row">
+			<div class="small-2 large-4 columns">
+				<h3 class="float-left">
+					<a href="../index.html">retour</a>
+				</h3>
+			</div>
+			<div class="small-2 large-4 columns">
+				<h2 class="float-center">Interface Client</h2>
+			</div>
+			<div class="small-2 large-4 columns">
+				<h3 class="float-right">
+					<a href="#">...</a>
+				</h3>
+			</div>
+		</div>
+		<div class="row">
+			<ul class="tabs" data-active-collapse="true" data-tabs
+				id="collapsing-tabs">
+				<li class="tabs-title is-active"><a href="#inscription"
+					aria-selected="true">Inscription</a></li>
+				<li class="tabs-title"><a href="#reservation">Reservation</a></li>
+				<li class="tabs-title"><a href="#location">Location</a></li>
+				<li class="tabs-title"><a href="#panel4c">...</a></li>
+			</ul>
+
+			<div class="tabs-content" data-tabs-content="collapsing-tabs">
+				<div class="tabs-panel is-active" id="inscription">
+					<form>
+						<div class="row">
+							<div class="medium-12 columns">
+								<fieldset>
+									<legend>Type utilisateur</legend>
+									<input type="radio" name="type" value="Abonne" id="typeAbonne"
+										required> <label for="typeAbonne">Abonné</label> <input
+										type="radio" name="type" value="NonAbonne" id="typeNonAbonne">
+									<label for="typeNonAbonne">Non abonné</label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-4 columns">
+								<label>Nom <input type="text" id="nom" placeholder="Doe">
+								</label>
+							</div>
+							<div class="medium-4 columns">
+								<label>Prénom <input type="text" id="prenom" placeholder="Jhon">
+								</label>
+							</div>
+							<div class="medium-4 columns">
+								<label>Code secret <input type="number" id="codeSecret" placeholder="xxxx">
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<label>Date naissance <input type="date" id="date">
+								</label>
+							</div>
+							<div class="medium-6 columns">
+								<fieldset  id="sexe">
+									<legend>Sexe</legend>
+									<input type="radio" name="sexe" value="Homme" id="sexeHomme"
+										required> <label for="sexeHomme">Homme</label> <input
+										type="radio" name="sexe" value="Femme" id="sexeFemme">
+									<label for="sexeFemme">Femme</label> <input type="radio"
+										name="sexe" value="Autre" id="sexeAutre"> <label
+										for="sexeAutre">Autre</label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-6 columns">
+								<label>Adresse <input type="text" id="adresse" placeholder="Adresse">
+								</label>
+							</div>
+							<div class="medium-6 columns">
+								<label>Numéro CB <input type="text"
+									placeholder="xxxxxxxxxxxxxxxx">
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+								<button type="button" class="success button float-center"
+									onclick="creerUtilisateur();">Créer</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="tabs-panel" id="reservation">
+					<p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed
+						auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in
+						nulla enim. Phasellus molestie magna non est bibendum non
+						venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.
+					</p>
+				</div>
+				<div class="tabs-panel" id="location">
+					<img class="thumbnail" src="/interfaces/earth.jpg">
+				</div>
+				<div class="tabs-panel" id="panel4c">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<hr />
+		</div>
+
+		<div class="row">
+			<div class="row">
+				<h4 class="float-left">Table client</h4>
+				<h4 class="float-right" onclick="TODOREFRESH();"><a href="#">refresh</a></h4>
+			</div>
+			<div class="row">
+				<select name="cars" multiple>
+					<option value="volvo">Volvo</option>
+				</select>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
-		function premierScenarioPartUn() {
-			var http = new XMLHttpRequest();
-			var url = "/java/Scenario";
-			var params = "commande=scenario&num=1&part=1";
-			http.open("POST", url, true);
-
-			//Send the proper header information along with the request
-			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			http.onreadystatechange = function() {//Call a function when the state changes.
-			    if(http.readyState == 4 && http.status == 200) {
-			        console.log(http.responseText);
-			        premierScenarioPartDeux();
-			    }
-			}
-			http.send(params);
-		}
-		
-		function premierScenarioPartDeux() {
-			var http = new XMLHttpRequest();
-			var url = "/java/Scenario";
-			var params = "commande=scenario&num=1&part=2";
-			http.open("POST", url, true);
-
-			//Send the proper header information along with the request
-			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			http.onreadystatechange = function() {//Call a function when the state changes.
-			    if(http.readyState == 4 && http.status == 200) {
-			    	console.log(http.responseText);
-			    }
-			}
-			http.send(params);
-		}
+		$(document).foundation();
 	</script>
 </body>
 </html>

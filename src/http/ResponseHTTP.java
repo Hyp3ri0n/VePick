@@ -6,6 +6,7 @@ public class ResponseHTTP
 		
 		TEXT_HTML(new String[]{"html"}, "text/html"),
 		TEXT_PLAIN(new String[]{"txt"}, "text/plain"),
+		APPLICATION_JAVASCRIPT(new String[]{"js"}, "application/javascript"),
 		IMAGE_JPG(new String[]{"jpg", "jpeg"}, "image/jpg"),
 		IMAGE_PNG(new String[]{"png"}, "image/png");
 		
@@ -71,7 +72,7 @@ public class ResponseHTTP
 		String s = "";
 		
 		s += HTTP1_1 + " " + this.code + "\r\n";
-		s += "Content-Type: " + this.contentType + "\r\n";
+		s += "Content-Type: " + this.contentType + "; charset=utf-8\r\n";
 		s += "Content-Length: " + this.content.length + "\r\n";
 		s += "\r\n";
 		
