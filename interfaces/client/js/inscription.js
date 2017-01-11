@@ -22,30 +22,45 @@ $(document).ready(function() {
 function creerUtilisateur() {
 	
 	var type = $("input[type=radio][name=type]").val();
-	var nom = $("input[type=text][id=nom]").val();
+	var nom = $("#nom").val();
 	var prenom = $("#prenom").val();
 	var code = $("#codeSecret").val();
 	var date = $("#date").val();
-	var sexe = $("#sexe").val();
-	var nom = $("#adresse").val();
+	var sexe = $("input[type=radio][name=sexe]").val();
+	var adresse = $("#adresse").val();
+	var cb = $("#cb").val();
 	
-	alert(type, nom, prenom, code, date, sexe, nom);
+//	console.log(type);
+//	console.log(nom);
+//	console.log(prenom);
+//	console.log(code);
+//	console.log(date);
+//	console.log(sexe);
+//	console.log(adresse);
+//	console.log(cb);
 	
-//	var http = new XMLHttpRequest();
-//	var url = "/java/Scenario";
-//	var params = "commande=scenario&num=1&part=1";
-//	http.open("POST", url, true);
-//
-//	//Sendtheproperheaderinformationalongwiththerequest
-//	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//
-//	http.onreadystatechange = function(){//Callafunctionwhenthestatechanges.
-//		if(http.readyState == 4 && http.status == 200){
-//			console.log(http.responseText);
-//			premierScenarioPartDeux();
-//		}
-//	}
-//	http.send(params);
+
+	var params = "commande=client&action=inscription";
+	
+	if (type == "Abonne") {
+		params += "&type=abonne&nom=" + nom + "&prenom=" + prenom + "&code=" + code + "&date=" + date + "&sexe=" + sexe + "&adresse=" + adresse + "&cb=" + cb;
+	} else {
+		params += "&type=nonAbonne" + "&cb=" + cb;
+	}
+	
+	var http = new XMLHttpRequest();
+	var url = "/java/Client";
+	http.open("POST", url, true);
+
+	//Sendtheproperheaderinformationalongwiththerequest
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	http.onreadystatechange = function(){//Callafunctionwhenthestatechanges.
+		if(http.readyState == 4 && http.status == 200){
+			console.log(http.responseText);
+		}
+	}
+	http.send(params);
 }
 
 
